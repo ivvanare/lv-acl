@@ -1,0 +1,106 @@
+<div id="appContent">
+	<h2>Usuarios</h2>
+  <div class="card-body">
+	  <div class="card m-b-15">
+	    <!-- BEGIN card-header -->
+	    <div class="card-header card-header-inverse">
+	      <h4 class="card-header-title">Usuarios</h4>
+	      <div class="card-header-btn">
+	        <a href="#" data-toggle="card-expand" class="btn btn-success"><i class="fa fa-expand"></i></a>
+	        <a  (click)="reload()" data-toggle="card-refresh" class="btn btn-warning"><i class="fa fa-redo"></i></a>
+	        <a  href="#" data-toggle="card-remove" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+	      </div>
+	    </div>
+	    <!-- END card-header -->
+	    <!-- BEGIN card-body -->
+	    <div class="card-body">
+
+				<div *ngIf="Loading; else notloading">
+  				<div class="d-flex justify-content-center">
+					  <div class="spinner-border text-success" role="status">
+					    <span class="sr-only">Cargando...</span>
+					  </div>
+					</div>
+				</div>
+
+				<ng-template #notloading>
+		      <div class="container-fluid">
+		        <div class="row mb-2">
+		          <div class="col-sm-6">
+		            <h6 class="m-0 text-dark">Listado de usuarios</h6>
+		          </div><!-- /.col -->
+		          <div class="col-sm-6">
+		            <div class="pull-right">
+		              <small><a class="btn btn-success" [routerLink]="['Usuarios/Crear']" role="button">Crear</a></small>
+		            </div>
+		          </div><!-- /.col -->
+		        </div><!-- /.row -->
+		      </div><!-- /.container-fluid -->
+		      <div class="table-responsive">
+		        <table id="" class="table table-striped table-small-letter" >
+		          <thead>
+		            <tr style="background-color: #A0A0A0">
+		              <th>Id</th>
+		              <th>Nombre</th>
+		              <th>Email</th>
+		              <th>Email verified at</th>
+		              <th>Avatar</th>
+		              <th>Avatar URL</th>
+		              <th>Active</th>
+		              <th>Created_at</th>
+		              <th>Updated_at</th>
+		              <th>Delete_at</th>
+		              <th>Action</th>
+		            </tr>
+		          </thead>
+		          <tbody>
+		            <tr *ngFor= "let usuario of usuarios">
+		              <td>{{ usuario.id }}</td>
+		              <td>{{ usuario.name }}</td>
+		              <td>{{ usuario.email }}</td>
+		              <td>{{ usuario.email_verified_at }}</td>
+		              <td>{{ usuario.avatar }}</td>
+		              <td>{{ usuario.avatar_url }}</td>
+		              <td>{{ usuario.active }}</td>
+		              <td>{{ usuario.created_at }}</td>
+		              <td>{{ usuario.updated_at }}</td>
+		              <td>{{ usuario.deleted_at }}</td>
+		              <td>
+
+		                <a [routerLink]="['Editar/',usuario.id]" class="btn btn-outline-primary" title="editar" role="button">Editar</a>
+
+		                <div *ngIf="usuario.active; else Activated">
+		                	<a (click)="desactivate(usuario.id)" class="btn btn-outline-danger" title="desactivar" role="button">Desactivar</a>
+										</div>
+										<ng-template #Activated>
+		                	<a (click)="activate(usuario.id)" class="btn btn-outline-success" title="activar" role="button">Activar</a>
+										</ng-template>
+
+		                <a (click)="delete(usuario.id)" class="btn btn-outline-danger" title="eliminar" role="button">Eliminar</a>
+
+		              </td>
+		            </tr>
+		          </tbody>
+		        </table>
+		      </div>
+				</ng-template>
+	    </div>
+	    <div class="card-footer clearfix pull-right">
+	      <div class="col-xl-12 pull-right">
+	        <div class="pull-right">
+	        <ul class="pagination pagination-sm m-0 ">
+	          <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+	          <li class="page-item"><a class="page-link" href="#">1</a></li>
+	          <li class="page-item"><a class="page-link" href="#">2</a></li>
+	          <li class="page-item"><a class="page-link" href="#">3</a></li>
+	          <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+	        </ul>
+	      </div>
+
+	    </div>
+
+	    </div>
+	    <!-- END card-body -->
+	  </div>
+	</div>
+</div>
